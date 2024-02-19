@@ -65,17 +65,15 @@ def test_modalities():
 
     # test empty context
     modalities.loglikelihood([("", "test")])
-
-    # TODO add test for greedy_until after adding a language model head to our model
+    greedy_len = 20
     (gen,) = modalities.greedy_until(
-        [("The quick brown fox jumps over the lazy", {"until": [".", "\n"], "max_length": 20})]
+        [("The quick brown fox jumps over the lazy", {"until": [".", "\n"], "max_length": greedy_len})]
     )
-
     assert type(gen) == str
+    assert len(gen.split()) == greedy_len
 
 
 # Test HuggingFace Models (GPT-2)
-
 def test_gpt2():
     gpt2 = models.get_model("gpt2").create_from_arg_string("device=cpu")
     (
