@@ -66,9 +66,9 @@ def test_modalities():
     # test empty context
     modalities.loglikelihood([("", "test")])
     greedy_len = 20
-    (gen,) = modalities.greedy_until(
+    gen = modalities.greedy_until(
         [("The quick brown fox jumps over the lazy", {"until": [".", "\n"], "max_length": greedy_len})]
-    )
+    )[0]
     assert type(gen) == str
     assert len(gen.split()) == greedy_len
 
