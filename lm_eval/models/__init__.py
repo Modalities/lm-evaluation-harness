@@ -18,7 +18,7 @@ MODEL_REGISTRY = {
     "megatronlm": megatronlm.MegatronLMClient,
     "textsynth": textsynth.TextSynthLM,
     "dummy": dummy.DummyLM,
-    "modalities": modalities.Modalities
+    "modalities_mamba": modalities.Modalities
 }
 
 

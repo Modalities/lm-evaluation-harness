@@ -2,8 +2,7 @@
 from typing import Union, List, Optional
 import torch
 from transformers import AutoConfig, AutoModel, AutoModelForCausalLM, BatchEncoding
-from modalities.config.config import HuggingFaceModelConfig
-from modalities.models.gpt2.huggingface_model import HuggingFaceModel
+from modalities.models.huggingface_adapters.mamba_hf_adapter import MambaHuggingFaceAdapterConfig, MambaHuggingFaceModelAdapter
 from .huggingface import AutoCausalLM
 
 TokenSequence = Union[List[int], torch.LongTensor, torch.Tensor, BatchEncoding]
@@ -11,8 +10,8 @@ TokenSequence = Union[List[int], torch.LongTensor, torch.Tensor, BatchEncoding]
 
 class Modalities(AutoCausalLM):
     def __init__(self, *args, **kwargs):
-        AutoConfig.register("modalities_gpt2", HuggingFaceModelConfig)
-        AutoModelForCausalLM.register(HuggingFaceModelConfig, HuggingFaceModel)
+        AutoConfig.register("modalities_mamba", MambaHuggingFaceAdapterConfig)
+        AutoModelForCausalLM.register(MambaHuggingFaceAdapterConfig, MambaHuggingFaceModelAdapter)
         # TODO load our own tokenizer
         super().__init__(tokenizer="gpt2", *args, **kwargs)
 
