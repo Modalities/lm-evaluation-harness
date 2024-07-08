@@ -91,6 +91,7 @@ class HuggingFaceAutoLM(BaseLM):
         load_in_4bit: Optional[bool] = False,
         trust_remote_code: Optional[bool] = False,
         gptq_use_triton: Optional[bool] = False,
+        **kwargs
     ):
         """Initializes a HuggingFace `AutoModel` and `AutoTokenizer` for evaluation.
         Args:
@@ -214,6 +215,7 @@ class HuggingFaceAutoLM(BaseLM):
             load_in_8bit=load_in_8bit,
             load_in_4bit=load_in_4bit,
             **model_kwargs,
+            **kwargs
         )
         # note: peft_path can be different than pretrained model path
         if peft is not None:
@@ -251,6 +253,7 @@ class HuggingFaceAutoLM(BaseLM):
         trust_remote_code: Optional[bool] = False,
         torch_dtype: Optional[Union[str, torch.dtype]] = None,
         gptq_use_triton: Optional[bool] = False,
+        **kwargs
     ) -> transformers.AutoModel:
         """Returns a pre-trained pytorch model from a pre-trained model configuration."""
         if not quantized:
@@ -271,6 +274,7 @@ class HuggingFaceAutoLM(BaseLM):
                 trust_remote_code=trust_remote_code,
                 torch_dtype=torch_dtype,
                 **model_kwargs,
+                **kwargs
             )
         else:
             from auto_gptq import AutoGPTQForCausalLM
