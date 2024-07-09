@@ -54,9 +54,26 @@ LOGLIKELIHOOD_TEST_CASES = [
 ]
 
 
+def test_modalities():
+    # dismiss sequences that are too long for our test checkpoint
+    test_cases = LOGLIKELIHOOD_TEST_CASES[:5]
+    modalities = models.get_model("modalities").create_from_arg_string("pretrained='testdata/models/modalities/checkpoint'")
+    results = modalities.loglikelihood(test_cases)
+    for loglikelihood, is_max_loglikelihood in results:
+        assert type(loglikelihood) == float
+        assert type(is_max_loglikelihood) == bool
+
+    # test empty context
+    modalities.loglikelihood([("", "test")])
+    greedy_len = 20
+    gen = modalities.greedy_until(
+        [("The quick brown fox jumps over the lazy", {"until": [".", "\n"], "max_length": greedy_len})]
+    )[0]
+    assert type(gen) == str
+    assert len(gen.split()) == greedy_len
+
+
 # Test HuggingFace Models (GPT-2)
-
-
 def test_gpt2():
     gpt2 = models.get_model("gpt2").create_from_arg_string("device=cpu")
     (
@@ -79,7 +96,7 @@ def test_gpt2():
     gpt2.loglikelihood([("", "test")])
 
     (gen,) = gpt2.greedy_until(
-        [("The quick brown fox jumps over the lazy", [".", "\n"])]
+        [("The quick brown fox jumps over the lazy", {"until": [".", "\n"]})]
     )
 
     assert gen == ", lazy fox and they both fall to the ground"
