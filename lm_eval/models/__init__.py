@@ -7,5 +7,6 @@ from . import gguf
 from . import vllm_causallms
 from . import mamba_lm
 from . import optimum_lm
+from . import modalities
 
 # TODO: implement __all__
