@@ -1,13 +1,17 @@
 """
 Take in a YAML, and output all "other" splits with this YAML
 """
-import os
-import yaml
-import argparse
 
+import argparse
+import logging
+import os
+
+import yaml
 from tqdm import tqdm
 
-from lm_eval.logger import eval_logger
+
+eval_logger = logging.getLogger("lm-eval")
+
 
 SUBJECTS = {
     "abstract_algebra": "stem",
@@ -106,10 +110,9 @@ if __name__ == "__main__":
 
         yaml_dict = {
             "include": base_yaml_name,
-            "group": f"mmlu_{args.task_prefix}_{category}"
+            "tag": f"mmlu_{args.task_prefix}_{category}"
             if args.task_prefix != ""
             else f"mmlu_{category}",
-            "group_alias": category.replace("_", " "),
             "task": f"mmlu_{args.task_prefix}_{subject}"
             if args.task_prefix != ""
             else f"mmlu_{subject}",
@@ -124,7 +127,6 @@ if __name__ == "__main__":
             yaml.dump(
                 yaml_dict,
                 yaml_file,
-                # width=float("inf"),
                 allow_unicode=True,
                 default_style='"',
             )

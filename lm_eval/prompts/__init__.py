@@ -1,9 +1,10 @@
-import os
 import ast
-
+import os
 from typing import Dict
+
 from lm_eval import utils
 from lm_eval.utils import eval_logger
+
 
 # Prompt library.
 # Stores prompts in a dictionary indexed by 2 levels:
@@ -28,8 +29,8 @@ def get_prompt(prompt_id: str, dataset_name: str = None, subset_name: str = None
     if category_name == "promptsource":
         try:
             from promptsource.templates import DatasetTemplates
-        except ModuleNotFoundError:
-            raise Exception(
+        except ModuleNotFoundError as exception:
+            raise type(exception)(
                 "Tried to load a Promptsource template, but promptsource is not installed ",
                 "please install promptsource via pip install lm-eval[promptsource] or pip install -e .[promptsource]",
             )
@@ -117,7 +118,7 @@ class PromptString:
 
         # TODO need a way to process doc_to_choice
         if "doc_to_choice" in self.prompt_string:
-            raise Exception("Not yet implemented to accept doc_to_choice")
+            raise NotImplementedError("Not yet implemented to accept doc_to_choice")
 
         text_string = utils.apply_template(doc_to_text, doc)
         target_string = utils.apply_template(doc_to_target, doc)

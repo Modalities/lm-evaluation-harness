@@ -68,13 +68,17 @@ class GGUFLM(LM):
                 logger.error(f"RequestException: {e}")
                 time.sleep(delay)  # wait before retrying
         else:
-            raise Exception(f"Failed to get a valid response after {retries} retries.")
+            raise RuntimeError(
+                f"Failed to get a valid response after {retries} retries."
+            )
 
-    def loglikelihood(self, requests):
+    def loglikelihood(self, requests, disable_tqdm: bool = False):
         if not requests:
             return []
         res = []
-        for context, continuation in tqdm([req.args for req in requests]):
+        for context, continuation in tqdm(
+            [req.args for req in requests], disable=disable_tqdm
+        ):
             response = self.gguf_completion(context=context, continuation=continuation)
             if response and "choices" in response and response["choices"]:
                 choice = response["choices"][0]
@@ -97,12 +101,12 @@ class GGUFLM(LM):
                 assert False
         return res
 
-    def generate_until(self, requests):
+    def generate_until(self, requests, disable_tqdm: bool = False):
         if not requests:
             return []
 
         res = []
-        for request in tqdm([req.args for req in requests]):
+        for request in tqdm([req.args for req in requests], disable=disable_tqdm):
             inp = request[0]
             request_args = request[1]
             until = request_args.get("until", ["</s>"])
@@ -122,7 +126,7 @@ class GGUFLM(LM):
                 res.append(None)  # Add default value in case of error
         return res
 
-    def loglikelihood_rolling(self, requests):
+    def loglikelihood_rolling(self, requests, disable_tqdm: bool = False):
         raise NotImplementedError(
             "loglikelihood_rolling not yet supported for GGUF models"
         )
