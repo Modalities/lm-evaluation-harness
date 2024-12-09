@@ -115,7 +115,7 @@ class HFLM(TemplateLM):
             assert isinstance(batch_size, (int, str))
 
             gpus = torch.cuda.device_count()
-            accelerator_kwargs = InitProcessGroupKwargs(timeout=timedelta(weeks=nccl_timeout))
+            accelerator_kwargs = InitProcessGroupKwargs(timeout=nccl_timeout)
             accelerator = Accelerator(kwargs_handlers=[accelerator_kwargs])
             if accelerator.num_processes > 1:
                 self.accelerator = accelerator
