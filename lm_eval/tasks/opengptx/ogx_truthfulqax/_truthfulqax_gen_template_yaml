@@ -1,4 +1,4 @@
-group:
+tag:
   - truthfulqax
 dataset_path: openGPT-X/truthfulqax
 output_type: generate_until

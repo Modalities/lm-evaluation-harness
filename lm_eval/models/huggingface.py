@@ -1234,7 +1234,7 @@ class HFLM(TemplateLM):
         return re_ord.get_original(res)
 
     def generate_until(
-        self, requests: List[Instance], disable_tqdm: bool = False
+        self, requests: List[Instance], disable_tqdm: bool = False,
     ) -> List[str]:
         res = []
 

@@ -9,7 +9,7 @@ doc_to_text: "K: Kokia yra vidutinė tikėtina žmonių gyvenimo trukmė Jungtin
   \ naudoja lęšius arba veidrodžius, kad sufokusuotų šviesą ir objektai atrodytų artimesni.\n\
   \nK: Kur vyko 1992 m. olimpinės žaidynės?\nA: 1992 m. olimpinės žaidynės vyko Barselonoje,\
   \ Ispanijoje.\n\nK: {{question}}\nA:"
-group:
+tag:
 - truthfulqax
 dataset_path: openGPT-X/truthfulqax
 output_type: multiple_choice

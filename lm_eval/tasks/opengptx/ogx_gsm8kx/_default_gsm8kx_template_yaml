@@ -1,4 +1,4 @@
-group:
+tag:
   - math_word_problems
   - gsm8kx
 dataset_path: openGPT-X/gsm8kx

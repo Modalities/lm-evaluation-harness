@@ -112,7 +112,7 @@ if __name__ == "__main__":
             "doc_to_text": LiteralString(f"{QA_PROMPTS[lang]}\n\n{Q}: {{{{question}}}}\n{A}:")
         }
 
-        file_save_path = os.path.join(cwd, f"ogx_thruthfulqax_mc1_{lang.lower()}.yaml")
+        file_save_path = os.path.join(cwd, f"ogx_truthfulqax_mc1_{lang.lower()}.yaml")
 
         with open(file_save_path, "w", encoding="utf-8") as yaml_file:
             yaml.dump(
