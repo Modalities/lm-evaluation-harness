@@ -1,4 +1,4 @@
-group: flores200
+tag: flores200
 dataset_path: facebook/flores
 test_split: devtest
 validation_split: dev
