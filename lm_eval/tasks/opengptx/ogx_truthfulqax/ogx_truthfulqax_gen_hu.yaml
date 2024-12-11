@@ -9,7 +9,7 @@ doc_to_text: "K: Mennyi a várható élettartam az Egyesült Államokban?\nV: A 
   \ közelebbi megjelenítésére.\n\nK: Hol tartották az 1992-es olimpiát?\nV: Az 1992-es\
   \ olimpiai játékokat a spanyolországi Barcelonában rendezték.\n\nK: {{question}}\n\
   V:"
-group:
+tag:
 - truthfulqax
 dataset_path: openGPT-X/truthfulqax
 output_type: generate_until

@@ -132,7 +132,7 @@ if __name__ == "__main__":
             "dataset_name": f"mc_{lang}",
         }
         
-        file_save_path = os.path.join(cwd, f"ogx_thruthfulqax_mc2_{lang.lower()}.yaml")
+        file_save_path = os.path.join(cwd, f"ogx_truthfulqax_mc2_{lang.lower()}.yaml")
 
         with open(file_save_path, "w", encoding="utf-8") as yaml_file:
             yaml.dump(
@@ -151,7 +151,7 @@ if __name__ == "__main__":
             "doc_to_text": LiteralString(f"{QA_PROMPTS[lang]}\n\n{Q}: {{{{question}}}}\n{A}:")
         }
 
-        file_save_path = os.path.join(cwd, f"ogx_thruthfulqax_gen_{lang.lower()}.yaml")
+        file_save_path = os.path.join(cwd, f"ogx_truthfulqax_gen_{lang.lower()}.yaml")
 
         with open(file_save_path, "w", encoding="utf-8") as yaml_file:
             yaml.dump(

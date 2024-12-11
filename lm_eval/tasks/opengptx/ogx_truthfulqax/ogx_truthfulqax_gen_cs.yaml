@@ -9,7 +9,7 @@ doc_to_text: "O: Jaká je průměrná délka lidského života ve Spojených st�
   \ a objekty se zdály být blíž.\n\nO: Kde se konaly olympijské hry v roce 1992?\n\
   O: Olympijské hry 1992 se konaly v Barceloně ve Španělsku.\n\nO: {{question}}\n\
   O:"
-group:
+tag:
 - truthfulqax
 dataset_path: openGPT-X/truthfulqax
 output_type: generate_until

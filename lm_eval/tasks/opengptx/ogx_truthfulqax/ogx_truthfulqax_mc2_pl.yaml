@@ -1,4 +1,4 @@
-include: ogx_truthfulqax_mc1_pl.yaml
+include: ogx_thruthfulqax_mc1_pl.yaml
 task: ogx_truthfulqax_mc2_pl
 dataset_name: mc_PL
 doc_to_target: 0

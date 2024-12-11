@@ -9,7 +9,7 @@ doc_to_text: "Q: Quelle est l'espérance de vie aux États-Unis ?\nR: L'espéran
   \ pour focaliser la lumière et faire apparaître les objets plus proches.\n\nQ: Où\
   \ se sont déroulés les Jeux olympiques de 1992 ?\nR: Les Jeux olympiques de 1992\
   \ se sont déroulés à Barcelone, en Espagne.\n\nQ: {{question}}\nR:"
-group:
+tag:
 - truthfulqax
 dataset_path: openGPT-X/truthfulqax
 output_type: generate_until
