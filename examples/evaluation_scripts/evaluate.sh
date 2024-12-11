@@ -17,8 +17,8 @@ SCRIPT="/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness/lm_eval/__
 SCRIPT_MT_BENCH="/raid/fhgiais/opengptx/alexj/evaluations/mt_bench_modalities/MT-Bench-X/src/mtbenchx/__main__.py"
 
 
-MODEL_NAME=TrustLLMeu-baseline-7-8b_1t-tokens_llama
-MODEL_DIR=TrustLLMeu/baseline-7-8b_1t-tokens_llama
+MODEL_NAME=modalities_apple_2_6t
+MODEL_DIR=/raid/s3/opengptx/alexj/opengptx/models_to_evaluate/modalities_apple_2_6t/converted_checkpoint
 
 ## Output directory
 OUTPUT_DIRECTORY="/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness/evaluation_scripts/results/$MODEL_NAME"
@@ -157,15 +157,15 @@ FLORES200_TASKS_K_3=ogx_flores200-trans-pol_Latn-bul_Cyrl,ogx_flores200-trans-po
 #echo $FLORES200_TASKS
 #echo $count
 # Define the arguments for each execution
-ALL_TASKS_ZEROSHOT_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --tasks $TRUTHFULQA_TASKS,$BELEBELE_TASKS --output_path $OUTPUT_DIRECTORY"
+ALL_TASKS_ZEROSHOT_RUN="--model modalities --model_args=pretrained="$MODEL_DIR",dtype=bfloat16,prediction_key=logits --batch_size "auto" --trust_remote_code --tasks $TRUTHFULQA_TASKS,$BELEBELE_TASKS --output_path $OUTPUT_DIRECTORY"
 
-HELLASWAG_FEWSHOT_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 10  --batch_size "auto" --tasks $HELLASWAG_TASKS --output_path $OUTPUT_DIRECTORY"
-ARC_FEWSHOT_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 25 --batch_size "auto" --tasks $ARC_EASY_TASKS,$ARC_CHALLENGE_TASKS --output_path $OUTPUT_DIRECTORY"
-FEWSHOT_TASKS_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 5 --batch_size "auto" --tasks $MMLU_TASKS,$GSM8K_TASKS --output_path $OUTPUT_DIRECTORY"
+HELLASWAG_FEWSHOT_RUN="--model modalities --model_args=pretrained="$MODEL_DIR",dtype=bfloat16,prediction_key=logits --num_fewshot 10  --batch_size "auto" --trust_remote_code --tasks $HELLASWAG_TASKS --output_path $OUTPUT_DIRECTORY"
+ARC_FEWSHOT_RUN="--model modalities --model_args=pretrained="$MODEL_DIR",dtype=bfloat16,prediction_key=logits --num_fewshot 25 --batch_size "auto" --trust_remote_code --tasks $ARC_EASY_TASKS,$ARC_CHALLENGE_TASKS --output_path $OUTPUT_DIRECTORY"
+FEWSHOT_TASKS_RUN="--model modalities --model_args=pretrained="$MODEL_DIR",dtype=bfloat16,prediction_key=logits --num_fewshot 5 --batch_size "auto" --trust_remote_code --tasks $MMLU_TASKS,$GSM8K_TASKS --output_path $OUTPUT_DIRECTORY"
 
-FLORES_RUN_1="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --tasks $FLORES200_TASKS_K_1 --output_path $OUTPUT_DIRECTORY"
-FLORES_RUN_2="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --tasks $FLORES200_TASKS_K_2 --output_path $OUTPUT_DIRECTORY"
-FLORES_RUN_3="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --tasks $FLORES200_TASKS_K_3 --output_path $OUTPUT_DIRECTORY"
+FLORES_RUN_1="--model modalities --model_args=pretrained="$MODEL_DIR",dtype=bfloat16,prediction_key=logits --batch_size "auto" --trust_remote_code --tasks $FLORES200_TASKS_K_1 --output_path $OUTPUT_DIRECTORY"
+FLORES_RUN_2="--model modalities --model_args=pretrained="$MODEL_DIR",dtype=bfloat16,prediction_key=logits --batch_size "auto" --trust_remote_code --tasks $FLORES200_TASKS_K_2 --output_path $OUTPUT_DIRECTORY"
+FLORES_RUN_3="--model modalities --model_args=pretrained="$MODEL_DIR",dtype=bfloat16,prediction_key=logits --batch_size "auto" --trust_remote_code --tasks $FLORES200_TASKS_K_3 --output_path $OUTPUT_DIRECTORY"
 
 MT_BENCH_RUN="--model-path $MODEL_DIR --model-id opengptx --max-new-token 1024 --eval-languages DE EN --parallel 6 --model-id-postfix $MODEL_NAME --save-path $OUTPUT_DIRECTORY/mtbench.json"
 # DEBUG
@@ -175,17 +175,17 @@ MT_BENCH_RUN="--model-path $MODEL_DIR --model-id opengptx --max-new-token 1024 -
 WINGRANDE_PIQA_OPENQA_RUN="--model hf --model_args=pretrained="$MODEL_MODEL_DIR,trust_remote_code=True" --device $CUDA_NR --tasks winogrande,openbookqa,piqa,commonsense_qa --output_path /raid/s3/opengptx/alexj/github_runner/evaluation/results_of_evaluation/$MODEL_NAME/winogrande_piqa_openqa_tasks.json"
 RUN_FIFTH_TIME=false
 
-cd "/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness" || { echo "Failed to navigate to directory"; exit 1; }
+#cd "/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness/" || { echo "Failed to navigate to directory"; exit 1; }
 
+##
+## Run the script with the first set of arguments
+#accelerate launch "$SCRIPT" $ALL_TASKS_ZEROSHOT_RUN
 #
-# Run the script with the first set of arguments
-accelerate launch "$SCRIPT" $ALL_TASKS_ZEROSHOT_RUN
-
-# Check if the script ran successfully
-if [ $? -ne 0 ]; then
-  echo "Run BELEBELE failed to execute."
-  exit 1
-fi
+## Check if the script ran successfully
+#if [ $? -ne 0 ]; then
+#  echo "Run BELEBELE failed to execute."
+#  exit 1
+#fi
 
 # Run the script with the second set of arguments
 accelerate launch "$SCRIPT" $HELLASWAG_FEWSHOT_RUN
