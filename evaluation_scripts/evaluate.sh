@@ -13,7 +13,7 @@ export OPENAI_API_KEY=''
 export HF_TOKEN=''
 
 # Define the path to your Python script
-SCRIPT="/raid/fhgiais/opengptx/alexj/evaluations/lm-evaluation-harness/lm_eval/__main__.py"
+SCRIPT="/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness/lm_eval/__main__.py"
 SCRIPT_MT_BENCH="/raid/fhgiais/opengptx/alexj/evaluations/mt_bench_modalities/MT-Bench-X/src/mtbenchx/__main__.py"
 
 
@@ -21,7 +21,7 @@ MODEL_NAME=TrustLLMeu-baseline-7-8b_1t-tokens_llama
 MODEL_DIR=TrustLLMeu/baseline-7-8b_1t-tokens_llama
 
 ## Output directory
-OUTPUT_DIRECTORY="/raid/fhgiais/opengptx/alexj/evaluations/results_of_evaluations/$MODEL_NAME"
+OUTPUT_DIRECTORY="/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness/evaluation_scripts/results/$MODEL_NAME"
 # Check if the directory does not exist
 if [ ! -d "$OUTPUT_DIRECTORY" ]; then
   # Create the directory
@@ -174,6 +174,8 @@ MT_BENCH_RUN="--model-path $MODEL_DIR --model-id opengptx --max-new-token 1024 -
 # Define the arguments for the additional run if the flag is set
 WINGRANDE_PIQA_OPENQA_RUN="--model hf --model_args=pretrained="$MODEL_MODEL_DIR,trust_remote_code=True" --device $CUDA_NR --tasks winogrande,openbookqa,piqa,commonsense_qa --output_path /raid/s3/opengptx/alexj/github_runner/evaluation/results_of_evaluation/$MODEL_NAME/winogrande_piqa_openqa_tasks.json"
 RUN_FIFTH_TIME=false
+
+cd "/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness" || { echo "Failed to navigate to directory"; exit 1; }
 
 #
 # Run the script with the first set of arguments
