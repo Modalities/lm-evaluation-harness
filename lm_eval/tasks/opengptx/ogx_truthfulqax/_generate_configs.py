@@ -127,7 +127,7 @@ if __name__ == "__main__":
         base =  load_yaml_config(os.path.join(cwd,"_truthfulqax_mc2_template_yaml"))
             
         yaml_dict = {
-            "include": f"ogx_thruthfulqax_mc1_{lang.lower()}.yaml",
+            "include": f"ogx_truthfulqax_mc1_{lang.lower()}.yaml",
             "task": f"ogx_truthfulqax_mc2_{lang.lower()}",
             "dataset_name": f"mc_{lang}",
         }
