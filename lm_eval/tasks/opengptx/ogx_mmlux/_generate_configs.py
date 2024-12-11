@@ -150,6 +150,10 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
 
+    # args.save_dir = '/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness/lm_eval/tasks/opengptx/ogx_mmlux/'
+    # args.base_yaml = '_default_mmlux_template_yaml'
+    # args.descriptions = '/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness/lm_eval/tasks/opengptx/ogx_mmlux/subject_descriptions.json'
+
     descriptions = json.load(open(args.descriptions, "r"))
 
     for lang in LANGS:
@@ -162,7 +166,7 @@ if __name__ == "__main__":
                 "dataset_name": f"{subj}_{lang}",
                 "task": f"{args.prefix}_{lang.lower()}-{subj}",
                 # "task_alias": f"{subj}_{lang.lower()}",
-                "group": f"{args.prefix}_{cat}",
+                "tag": f"{args.prefix}_{cat}",
                 # "group_alias": f"{cat}",
                 "doc_to_choice": f"['{a}', '{b}', '{c}', '{d}']",
                 "doc_to_text": f"{{{{question.strip()}}}}\n{a}. {{{{choices[0]}}}}\n{b}. {{{{choices[1]}}}}\n{c}. {{{{choices[2]}}}}\n{d}. {{{{choices[3]}}}}\n{answer}:",
