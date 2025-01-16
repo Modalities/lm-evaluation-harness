@@ -9,7 +9,8 @@ LANGUAGES=("en" "de" "fr" "it" "es" "pt-pt" "ro" "cs" "da" "el" "et" "fi" "hu" "
 LC_TO_LANG=("eng_Latn" "bul_Cyrl" "dan_Latn" "deu_Latn" "est_Latn" "fin_Latn" "fra_Latn" "ell_Grek" "ita_Latn" "lvs_Latn" "lit_Latn" "nld_Latn" "pol_Latn" "por_Latn" "ron_Latn" "swe_Latn" "slk_Latn" "slv_Latn" "spa_Latn" "ces_Latn" "hun_Latn")
 
 # Define the path to your Python script
-#SCRIPT="/raid/s3/opengptx/alexj/modalities_eval/lm-evaluation-harness/lm_eval/__main__.py"
+
+############ yaml_multilingual_tasks_alex branch of OGX ################
 SCRIPT="/raid/s3/opengptx/alexj/github_runner/evaluation/lm-evaluation-harness/lm_eval/__main__.py"
 MODEL_NAME=baseline-7-8b_2-3t-tokens_llama
 MODEL_DIR=TrustLLMeu/baseline-7-8b_2-3t-tokens_llama
