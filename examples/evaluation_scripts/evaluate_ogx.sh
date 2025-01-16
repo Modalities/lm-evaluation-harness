@@ -147,13 +147,13 @@ FLORES200_TASKS_K_3=ogx_flores200-trans-pol_Latn-bul_Cyrl,ogx_flores200-trans-po
 
 # Define the arguments for each execution
 TRUTHFULQA_BELEBELE_TASK_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --tasks $TRUTHFULQA_TASKS,$BELEBELE_TASKS --output_path $OUTPUT_DIRECTORY"
-HELLASWAG_FEWSHOT_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 10  --batch_size "auto" --trust_remote_code --tasks $HELLASWAG_TASKS --output_path $OUTPUT_DIRECTORY"
-ARC_FEWSHOT_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 25 --batch_size "auto" --trust_remote_code --tasks $ARC_EASY_TASKS,$ARC_CHALLENGE_TASKS --output_path $OUTPUT_DIRECTORY"
-FEWSHOT_TASKS_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 5 --batch_size "auto" --trust_remote_code --tasks $MMLU_TASKS,$GSM8K_TASKS --output_path $OUTPUT_DIRECTORY"
+HELLASWAG_FEWSHOT_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 10  --batch_size "auto" --tasks $HELLASWAG_TASKS --output_path $OUTPUT_DIRECTORY"
+ARC_FEWSHOT_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 25 --batch_size "auto" --tasks $ARC_EASY_TASKS,$ARC_CHALLENGE_TASKS --output_path $OUTPUT_DIRECTORY"
+FEWSHOT_TASKS_RUN="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --num_fewshot 5 --batch_size "auto" --tasks $MMLU_TASKS,$GSM8K_TASKS --output_path $OUTPUT_DIRECTORY"
 
-FLORES_RUN_1="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --trust_remote_code --tasks $FLORES200_TASKS_K_1 --output_path $OUTPUT_DIRECTORY"
-FLORES_RUN_2="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --trust_remote_code --tasks $FLORES200_TASKS_K_2 --output_path $OUTPUT_DIRECTORY"
-FLORES_RUN_3="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --trust_remote_code --tasks $FLORES200_TASKS_K_3 --output_path $OUTPUT_DIRECTORY"
+FLORES_RUN_1="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --tasks $FLORES200_TASKS_K_1 --output_path $OUTPUT_DIRECTORY"
+FLORES_RUN_2="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --tasks $FLORES200_TASKS_K_2 --output_path $OUTPUT_DIRECTORY"
+FLORES_RUN_3="--model hf --model_args=pretrained="$MODEL_DIR",trust_remote_code=True --batch_size "auto" --tasks $FLORES200_TASKS_K_3 --output_path $OUTPUT_DIRECTORY"
 
 # Run the script with the first set of arguments
 accelerate launch "$SCRIPT" $TRUTHFULQA_BELEBELE_TASK_RUN
